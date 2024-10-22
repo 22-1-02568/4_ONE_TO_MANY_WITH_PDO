@@ -75,9 +75,8 @@ if (isset($_POST['deleteCustomerBtn'])) {
 // Handling form submission for adding an order
 if (isset($_POST['add_order'])) {
     $customer_id = $_POST['customer_id'];
-    $bartender_id = $_POST['bartender_id'];
-    $order_date = date('Y-m-d H:i:s'); // Current date and time
-    if (addOrder($conn, $customer_id, $bartender_id, $order_date)) {
+    $order_details = $_POST['order_details']; // Assuming you now collect order details
+    if (addOrder($conn, $customer_id, $order_details)) {
         header("Location: ../index.php?message=Order added successfully");
     } else {
         header("Location: ../index.php?error=Failed to add order");
@@ -89,9 +88,8 @@ if (isset($_POST['add_order'])) {
 if (isset($_POST['update_order'])) {
     $id = $_POST['order_id'];
     $customer_id = $_POST['customer_id'];
-    $bartender_id = $_POST['bartender_id'];
-    $order_date = $_POST['order_date'];
-    if (updateOrder($conn, $id, $customer_id, $bartender_id, $order_date)) {
+    $order_details = $_POST['order_details'];
+    if (updateOrder($conn, $id, $customer_id, $order_details)) {
         header("Location: ../index.php?message=Order updated successfully");
     } else {
         header("Location: ../index.php?error=Failed to update order");

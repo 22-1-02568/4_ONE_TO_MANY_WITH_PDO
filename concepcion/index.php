@@ -1,6 +1,7 @@
 <?php
 // Include the necessary files for database interaction and model functions
-include 'core/models.php';
+include 'core/dbconfig.php'; // Database configuration
+include 'core/models.php'; // Model functions
 
 // Fetch all bartenders, customers, and orders from the database
 $bartenders = getBartenders($conn);
@@ -52,9 +53,9 @@ if (isset($_GET['error'])) {
             <td><?= htmlspecialchars($bartender['name']) ?></td>
             <td>
                 <a href="editbartender.php?id=<?= $bartender['bartender_id'] ?>">Edit</a>
-                <form action="deletebartender.php" method="GET" style="display:inline;">
-                    <input type="hidden" name="id" value="<?= $bartender['bartender_id'] ?>">
-                    <button type="submit">Delete</button>
+                <form action="core/handleForms.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="bartender_id" value="<?= $bartender['bartender_id'] ?>">
+                    <button type="submit" name="deleteBartenderBtn">Delete</button>
                 </form>
             </td>
         </tr>
@@ -65,7 +66,7 @@ if (isset($_GET['error'])) {
     <form action="core/handleForms.php" method="POST">
         <label for="name">Name:</label>
         <input type="text" name="name" required>
-        <button type="submit" name="insertBartenderBtn">Add Bartender</button>
+        <button type="submit" name="add_bartender">Add Bartender</button>
     </form>
 
     <!-- Section: Customers -->
@@ -82,9 +83,9 @@ if (isset($_GET['error'])) {
             <td><?= htmlspecialchars($customer['name']) ?></td>
             <td>
                 <a href="editcustomer.php?id=<?= $customer['customer_id'] ?>">Edit</a>
-                <form action="deletecustomer.php" method="GET" style="display:inline;">
-                    <input type="hidden" name="id" value="<?= $customer['customer_id'] ?>">
-                    <button type="submit">Delete</button>
+                <form action="core/handleForms.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="customer_id" value="<?= $customer['customer_id'] ?>">
+                    <button type="submit" name="deleteCustomerBtn">Delete</button>
                 </form>
             </td>
         </tr>
@@ -95,7 +96,7 @@ if (isset($_GET['error'])) {
     <form action="core/handleForms.php" method="POST">
         <label for="name">Name:</label>
         <input type="text" name="name" required>
-        <button type="submit" name="insertCustomerBtn">Add Customer</button>
+        <button type="submit" name="add_customer">Add Customer</button>
     </form>
 
     <!-- Section: Orders -->
@@ -114,9 +115,9 @@ if (isset($_GET['error'])) {
             <td><?= htmlspecialchars($order['order_details']) ?></td>
             <td>
                 <a href="editorder.php?id=<?= $order['order_id'] ?>">Edit</a>
-                <form action="deleteorder.php" method="GET" style="display:inline;">
-                    <input type="hidden" name="id" value="<?= $order['order_id'] ?>">
-                    <button type="submit">Delete</button>
+                <form action="core/handleForms.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                    <button type="submit" name="deleteOrderBtn">Delete</button>
                 </form>
             </td>
         </tr>
@@ -129,7 +130,7 @@ if (isset($_GET['error'])) {
         <input type="number" name="customer_id" required>
         <label for="order_details">Order Details:</label>
         <input type="text" name="order_details" required>
-        <button type="submit" name="insertOrderBtn">Add Order</button>
+        <button type="submit" name="add_order">Add Order</button>
     </form>
 
 </body>

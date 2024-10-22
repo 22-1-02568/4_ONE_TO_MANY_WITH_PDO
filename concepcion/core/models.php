@@ -7,7 +7,7 @@ include 'dbconfig.php';
 function getBartenders($conn) {
     $sql = "SELECT * FROM bartenders";
     $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : []; // Return an empty array if the query fails
 }
 
 // Function to get a bartender by ID
@@ -51,7 +51,7 @@ function deleteBartender($conn, $id) {
 function getCustomers($conn) {
     $sql = "SELECT * FROM customers";
     $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : []; // Return an empty array if the query fails
 }
 
 // Function to get a customer by ID
@@ -95,7 +95,7 @@ function deleteCustomer($conn, $id) {
 function getOrders($conn) {
     $sql = "SELECT * FROM orders";
     $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : []; // Return an empty array if the query fails
 }
 
 // Function to get an order by ID
